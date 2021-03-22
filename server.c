@@ -8,13 +8,11 @@
 
 int main()
 {
-    printf("Hello World!\n");
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
-    printf("%d\n", server_fd);
     struct sockaddr_in address;
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
-    char *hello = "Hello from server";
+    char *hello = "I am your father";
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
@@ -25,6 +23,5 @@ int main()
     int valread = read(new_socket, buffer, 1024);
     printf("%s\n", buffer);
     send(new_socket, hello, strlen(hello), 0);
-    printf("Hello message sent\n");
     return 0;
 }

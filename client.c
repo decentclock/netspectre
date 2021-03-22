@@ -9,7 +9,7 @@ int main()
 {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char *hello = "Hello from client";
+    char *hello = "What the fuck";
     char buffer[1024] = {0};
     sock = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -19,7 +19,6 @@ int main()
     inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr);
     connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
     send(sock, hello, strlen(hello), 0);
-    printf("Hello message sent\n");
     valread = read(sock, buffer, 1024);
     printf("%s\n", buffer);
     return 0;
