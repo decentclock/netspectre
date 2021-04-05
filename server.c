@@ -14,7 +14,7 @@ int main()
     int addrlen = sizeof(address);
 
     char buffer[2] = {0};
-    char flag = '\x00';
+    char flag = '\xAA';
 
     /* Initialize the two argument vectors */
     __m256 evens = _mm256_set_ps(2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0);
@@ -39,9 +39,6 @@ int main()
             {
                 if (bitstream[buffer[1]])
                 {
-                    flag = '\x01';
-                    printf("Flag set to true\n");
-
                     /* Compute the difference between the two vectors */
                     __m256 result = _mm256_sub_ps(evens, odds);
 
@@ -53,6 +50,7 @@ int main()
         }
         else if (buffer[0] == '\x01')
         {
+            __m256 result = _mm256_sub_ps(evens, odds);
             send(new_socket, &flag, 1, 0);
         }
         else if (buffer[0] == '\xFF')
